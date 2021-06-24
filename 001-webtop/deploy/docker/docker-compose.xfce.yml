@@ -1,0 +1,23 @@
+version: "3.9"
+services:
+  webtop:
+    image: ghcr.io/linuxserver/webtop
+    container_name: "webtop_${desktop}"
+    env_file:
+      - common.environment
+      - xfce.environment
+    environment:
+      - shm-size="1gb"
+    restart: "unless-stopped"
+    networks:
+      linuxserver-webtop:
+    ports:
+      - "3000:3000"
+    volumes:
+      - local-config:/config
+      - ../../config:/opt/config
+
+networks:
+  linuxserver-webtop:
+volumes:
+  local-config:
